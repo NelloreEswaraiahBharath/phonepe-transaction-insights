@@ -1,17 +1,8 @@
 import streamlit as st
 import pandas as pd
-import mysql.connector
 
-# Connect DB
-conn = mysql.connector.connect(
-    host="localhost",
-    user="Bharath",
-    password="Bharath@1234",
-    database="phonepe"
-)
 
-df = pd.read_sql("SELECT * FROM transactions", conn)
-
+df = pd.read_csv("transactions.csv")
 st.title("📊 PhonePe Transaction Insights")
 
 # ---- STATE FILTER ----
