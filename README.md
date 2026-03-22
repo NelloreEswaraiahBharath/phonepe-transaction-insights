@@ -50,3 +50,18 @@ This project focuses on analyzing PhonePe transaction data to extract meaningful
 ## Conclusion
 
 This project demonstrates end-to-end data analysis, starting from raw data extraction to building an interactive dashboard for insights.
+
+Top States:
+Maharashtra, Karnataka, and Telangana have the highest transaction volume.
+
+Growth Trend:
+There is a steady increase in transactions from 2018 to 2023.
+
+Payment Type:
+Peer-to-peer payments dominate the platform usage.
+<img width="1913" height="918" alt="image" src="https://github.com/user-attachments/assets/8ca99387-c845-40e4-be6e-6ac9ae2b0773" />
+
+This project analyzes PhonePe transaction data by extracting JSON data,
+storing it in MySQL, performing SQL analysis, and building an interactive
+dashboard using Streamlit to visualize insights like state-wise trends,
+payment types, and growth patterns.
