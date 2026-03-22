@@ -3,7 +3,7 @@ import pandas as pd
 
 
 df = pd.read_csv("transactions.csv")
-st.title("📊 PhonePe Transaction Insights")
+st.title(" PhonePe Transaction Insights")
 
 # ---- STATE FILTER ----
 state = st.selectbox("Select State", df['state'].unique())
