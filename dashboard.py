@@ -1,29 +1,43 @@
 import streamlit as st
 import pandas as pd
+from utils.data_loader import load_data
+from analysis.insights import generate_insights
 
-# Load CSV
-df = pd.read_csv("csv/aggregated_transaction.csv")
+df = load_data()
 
-st.title("PhonePe Transaction Insights")
+st.set_page_config(page_title="PhonePe Insights", layout="wide")
 
-# ---- STATE FILTER ----
-state = st.selectbox("Select State", df['State'].unique())
+st.title("📊 PhonePe Transaction Insights Dashboard")
+
+# Sidebar Filters
+st.sidebar.header("Filters")
+state = st.sidebar.selectbox("Select State", df['State'].unique())
+
 filtered = df[df['State'] == state]
 
-st.subheader(f"Data for {state}")
-st.write(filtered)
+# KPI Section
+col1, col2 = st.columns(2)
+col1.metric("Total Transactions", int(filtered["Transaction_Count"].sum()))
+col2.metric("Total Amount", int(filtered["Amount"].sum()))
 
-# ---- BAR CHART ----
-st.subheader("Transaction Type Analysis")
-chart = filtered.groupby('Payment_Type')['Amount'].sum()
-st.bar_chart(chart)
+# Charts
+st.subheader("Payment Type Distribution")
+st.bar_chart(filtered.groupby('Payment_Type')['Amount'].sum())
 
-# ---- YEARLY TREND ----
 st.subheader("Yearly Trend")
-year_chart = filtered.groupby('Year')['Amount'].sum()
-st.line_chart(year_chart)
+st.line_chart(filtered.groupby('Year')['Amount'].sum())
 
-# ---- KPI ----
-st.subheader("Overall Metrics")
-st.metric("Total Transactions", int(filtered["Transaction_Count"].sum()))
-st.metric("Total Amount", int(filtered["Amount"].sum()))
+st.subheader("Top States")
+top_states = df.groupby('State')['Amount'].sum().sort_values(ascending=False).head(10)
+st.bar_chart(top_states)
+
+# Pie Chart
+st.subheader("Payment Share")
+payment_share = filtered.groupby('Payment_Type')['Amount'].sum()
+st.write(payment_share)
+
+# Insights
+st.subheader("📌 Key Insights")
+insights = generate_insights(df)
+for i in insights:
+    st.success(i)
