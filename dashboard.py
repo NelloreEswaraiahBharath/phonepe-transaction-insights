@@ -7,7 +7,7 @@ df = load_data()
 
 st.set_page_config(page_title="PhonePe Insights", layout="wide")
 
-st.title("📊 PhonePe Transaction Insights Dashboard")
+st.title(" PhonePe Transaction Insights Dashboard")
 
 # Sidebar Filters
 st.sidebar.header("Filters")
