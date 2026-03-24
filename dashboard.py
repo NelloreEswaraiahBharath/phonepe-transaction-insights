@@ -37,7 +37,7 @@ payment_share = filtered.groupby('Payment_Type')['Amount'].sum()
 st.write(payment_share)
 
 # Insights
-st.subheader("📌 Key Insights")
+st.subheader(" Key Insights")
 insights = generate_insights(df)
 for i in insights:
     st.success(i)
